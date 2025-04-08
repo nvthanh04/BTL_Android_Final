@@ -1,0 +1,8 @@
+<resources>
+    <string name="terms_policy">
+        Bằng cách tham gia, chúng tôi xác nhận\n
+        bạn đã đọc và đồng ý với\n
+        <font color="blue">"Điều kiện &amp; Điều khoản"</font> cùng\n
+        <font color="blue">"Chính sách bảo mật thông tin"</font> của FROG-LEARN
+    </string>
+</resources>

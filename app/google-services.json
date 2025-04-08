@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "95407426478",
+    "project_id": "btl-a51e8",
+    "storage_bucket": "btl-a51e8.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95407426478:android:7977c47834d7d16a22563f",
+        "android_client_info": {
+          "package_name": "com.example.btlandroid"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFmnSF9_wh8-M58PCQBSli0sqAPYQ1_W0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
