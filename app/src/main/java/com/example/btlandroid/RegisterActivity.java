@@ -1,110 +1,103 @@
 package com.example.btlandroid;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.btlandroid.Model.User;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
-    private EditText email,password, name, phone;
-    private Button btnregister;
+
+    private TextInputEditText emailEditText, nameEditText, phoneEditText, passwordEditText;
+    private Button registerButton;
+    private TextView backTextView;
     private FirebaseAuth mAuth;
+    private DatabaseReference mDatabase;
+
     @Override
-    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        // Khởi tạo Firebase
         mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference("users");
 
-        email = findViewById(R.id.email);
-        password = findViewById(R.id.password);
-        name = findViewById(R.id.name);
-        phone = findViewById(R.id.phone);
-        btnregister = findViewById(R.id.btnregister);
+        // Ánh xạ các view từ XML
+        emailEditText = findViewById(R.id.email);
+        nameEditText = findViewById(R.id.name);
+        phoneEditText = findViewById(R.id.phone);
+        passwordEditText = findViewById(R.id.password);
+        registerButton = findViewById(R.id.btnregister);
+        backTextView = findViewById(R.id.textView2);
 
-        btnregister.setOnClickListener(new View.OnClickListener(){
+        // Xử lý sự kiện nút Đăng ký
+        registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
-                register();
+            public void onClick(View v) {
+                registerUser();
+            }
+        });
+
+        // Xử lý sự kiện nút Back
+        backTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish(); // Quay lại màn hình trước
             }
         });
     }
 
-    private void register() {
-        String mail,pass, Name, Phone;
-        mail = email.getText().toString();
-        pass = password.getText().toString();
-        Name = name.getText().toString();
-        Phone = phone.getText().toString();
+    private void registerUser() {
+        String email = emailEditText.getText().toString().trim();
+        String name = nameEditText.getText().toString().trim();
+        String phone = phoneEditText.getText().toString().trim();
+        String password = passwordEditText.getText().toString().trim();
+        String role = "user"; // Vai trò mặc định, bạn có thể thay đổi
 
-        // Kiểm tra nếu trường nào bị trống
-        if (TextUtils.isEmpty(mail)) {
-            Toast.makeText(this, "Vui lòng nhập email!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (TextUtils.isEmpty(pass)) {
-            Toast.makeText(this, "Vui lòng nhập mật khẩu!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (TextUtils.isEmpty(Name)) {
-            Toast.makeText(this, "Vui lòng nhập họ và tên!", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (TextUtils.isEmpty(Phone)) {
-            Toast.makeText(this, "Vui lòng nhập số điện thoại!", Toast.LENGTH_SHORT).show();
+        // Kiểm tra dữ liệu đầu vào
+        if (email.isEmpty() || name.isEmpty() || phone.isEmpty() || password.isEmpty()) {
+            Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Đăng ký tài khoản
-        mAuth.createUserWithEmailAndPassword(mail, pass)
-                .addOnCompleteListener(task -> {
+        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            emailEditText.setError("Email không hợp lệ");
+            return;
+        }
+
+        if (password.length() < 6) {
+            passwordEditText.setError("Mật khẩu phải có ít nhất 6 ký tự");
+            return;
+        }
+
+        // Đăng ký với Firebase Authentication
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        FirebaseUser user = mAuth.getCurrentUser();
-                        if (user != null) {
-                            // Cập nhật tên hiển thị trong Firebase Authentication
-                            UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                    .setDisplayName(Name) // Cập nhật họ tên
-                                    .build();
+                        // Lấy ID người dùng từ Firebase
+                        String userId = mAuth.getCurrentUser().getUid();
 
-                            user.updateProfile(profileUpdates)
-                                    .addOnCompleteListener(updateTask -> {
-                                        if (updateTask.isSuccessful()) {
-                                            Log.d("FirebaseAuth", "Tên người dùng đã được cập nhật.");
-                                        }
-                                    });
+                        // Tạo đối tượng User
+                        User user = new User(userId, password, name, email, phone, role);
 
-                            // Lưu thêm thông tin vào Firebase Database
-                            DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("users");
-                            String userId = user.getUid();
-
-                            User userInfo = new User(userId, Name, mail, Phone);
-                            databaseRef.child(userId).setValue(userInfo)
-                                    .addOnCompleteListener(dbTask -> {
-                                        if (dbTask.isSuccessful()) {
-                                            Toast.makeText(this, "Đăng ký thành công!", Toast.LENGTH_SHORT).show();
-                                            Log.d("FirebaseAuth", "Thông tin người dùng đã được lưu vào Database.");
-                                            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                            startActivity(intent);
-                                        } else {
-                                            Log.e("FirebaseAuth", "Lỗi lưu thông tin: " + dbTask.getException().getMessage());
-                                        }
-                                    });
-                        }
+                        // Lưu thông tin người dùng vào Realtime Database
+                        mDatabase.child(userId).setValue(user)
+                                .addOnCompleteListener(task1 -> {
+                                    if (task1.isSuccessful()) {
+                                        Toast.makeText(RegisterActivity.this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
+                                        finish(); // Quay lại màn hình trước hoặc chuyển sang màn hình khác
+                                    } else {
+                                        Toast.makeText(RegisterActivity.this, "Lỗi khi lưu thông tin: " + task1.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                });
                     } else {
-                        Toast.makeText(this, "Đăng ký thất bại: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(RegisterActivity.this, "Đăng ký thất bại: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
     }

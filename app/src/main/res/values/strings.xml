@@ -1,0 +1,7 @@
+<resources>
+    <string name="my_products">Sản phẩm của tôi</string>
+    <string name="tab_recent">Gần đây</string>
+    <string name="tab_promote">Đẩy sản phẩm</string>
+    <string name="back_button">Nút quay lại</string>
+    <string name="home_button">Nút trang chủ</string>
+</resources>
