@@ -14,7 +14,10 @@ public class User {
             this.phone = phone;
         }
 
-        public String getPassword(){
+    public User(String userId, String name, String name1, String mail, String phone, String s) {
+    }
+
+    public String getPassword(){
             return password;
         }
 
