@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/border"
+    tools:context=".DoanhthuAdminActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- Thanh tiêu đề -->
+        <LinearLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:background="#CC34B6FF"
+            android:paddingVertical="40dp"
+            android:paddingLeft="22dp"
+            android:paddingRight="10dp"
+            android:layout_marginBottom="44dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="24dp"
+                android:src="@drawable/back"
+                android:scaleType="fitXY"
+                android:contentDescription="Biểu tượng Quay lại" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Thống Kê Doanh Thu"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:paddingVertical="7dp" />
+        </LinearLayout>
+
+        <!-- Nội dung chính -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="16dp"
+            android:gravity="center_horizontal">
+
+            <!-- Từ ngày -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="TỪ NGÀY:"
+                    android:textSize="16sp"
+                    android:gravity="start|center_vertical" />
+
+                <EditText
+                    android:id="@+id/etDateBD"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@android:drawable/edit_text"
+                    android:focusable="false"
+                    android:hint="dd/MM/yyyy"
+                    android:inputType="none"
+                    android:padding="8dp" />
+            </LinearLayout>
+
+            <!-- Đến ngày -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="32dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="ĐẾN NGÀY:"
+                    android:textSize="16sp"
+                    android:gravity="start|center_vertical" />
+
+                <EditText
+                    android:id="@+id/etDateKT"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="dd/MM/yyyy"
+                    android:inputType="none"
+                    android:focusable="false"
+                    android:background="@android:drawable/edit_text"
+                    android:padding="8dp" />
+            </LinearLayout>
+
+            <!-- Nút Doanh thu -->
+            <Button
+                android:id="@+id/btnDoanhthu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thống kê"
+                android:backgroundTint="#2196F3"
+                android:textColor="@android:color/white"
+                android:paddingHorizontal="24dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="32dp" />
+        </LinearLayout>
+
+            <!-- RecyclerView giữa -->
+
+            <!-- Tổng doanh thu -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerDoanhthu"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:padding="8dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvTongdoanhthu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Doanh thu: 0 VNĐ"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="#EE4D2D"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Thanh điều hướng dưới -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/thanhdieuhuong"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CC34B6FF"
+        android:elevation="4dp"
+        app:labelVisibilityMode="unlabeled"
+        app:menu="@menu/thanhdieuhuong" />
+
+</LinearLayout>

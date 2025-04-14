@@ -5,4 +5,7 @@
         <font color="blue">"Điều kiện &amp; Điều khoản"</font> cùng\n
         <font color="blue">"Chính sách bảo mật thông tin"</font> của FROG-LEARN
     </string>
+    <string name="book_name">Book Name</string>
+    <string name="book_price">Book Price</string>
+    <string name="book_note">Book Note</string>
 </resources>

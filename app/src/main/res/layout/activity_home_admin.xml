@@ -1,4 +1,5 @@
-<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
@@ -6,11 +7,12 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@drawable/border"
-    tools:context=".HomeActivity">
+    tools:context=".HomeAdminActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <!-- Thanh tìm kiếm -->
@@ -26,14 +28,14 @@
             android:layout_marginBottom="44dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginEnd="24dp"
-                android:text="←"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp" />
+                android:src="@drawable/back"
+                android:scaleType="fitXY"
+                android:contentDescription="Biểu tượng Quay lại" />
 
             <AutoCompleteTextView
                 android:id="@+id/searchAdmin"
@@ -52,11 +54,13 @@
                 android:drawablePadding="8dp"/>
 
             <ImageView
-                android:id="@+id/giohang"
+                android:id="@+id/ivAdd"
                 android:layout_width="33dp"
                 android:layout_height="29dp"
-                android:src="@drawable/cart_shopping"
-                android:scaleType="fitXY" />
+                android:layout_marginStart="8dp"
+                android:src="@drawable/add_24"
+                android:scaleType="fitXY"
+                android:contentDescription="Biểu tượng Thêm" />
         </LinearLayout>
 
         <!-- Danh mục cuộn ngang -->
@@ -91,6 +95,7 @@
                         android:textSize="18sp"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
+                        android:backgroundTint="#FFFFFF"
                         android:text="Tất cả"/>
                 </LinearLayout>
 
@@ -106,13 +111,13 @@
                     android:clickable="true"
                     android:focusable="true"
                     android:orientation="vertical">
-
                     <Button
                         android:id="@+id/btnTieuHoc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tiểu học"
                         android:textColor="#666666"
+                        android:backgroundTint="#FFFFFF"
                         android:textSize="18sp" />
                 </LinearLayout>
 
@@ -132,6 +137,7 @@
                         android:id="@+id/btnTHCS"
                         android:textColor="#666666"
                         android:textSize="18sp"
+                        android:backgroundTint="#FFFFFF"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="THCS"/>
@@ -152,6 +158,7 @@
                         android:id="@+id/btnTHPT"
                         android:textColor="#666666"
                         android:textSize="18sp"
+                        android:backgroundTint="#FFFFFF"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="THPT"/>
@@ -173,6 +180,7 @@
                         android:id="@+id/btnToic"
                         android:textColor="#666666"
                         android:textSize="18sp"
+                        android:backgroundTint="#FFFFFF"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="Toeic"/>
@@ -193,11 +201,11 @@
                         android:id="@+id/btnIelts"
                         android:textColor="#666666"
                         android:textSize="18sp"
+                        android:backgroundTint="#FFFFFF"
                         android:layout_height="wrap_content"
                         android:layout_width="wrap_content"
                         android:text="Ielts"/>
                 </LinearLayout>
-
             </LinearLayout>
         </HorizontalScrollView>
 
@@ -207,6 +215,17 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:background="@drawable/border"
-            android:paddingBottom="72dp" />
+            android:paddingBottom="10dp" />
     </LinearLayout>
+
+    <!-- Thanh điều hướng dưới -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#CC34B6FF"
+        android:elevation="4dp"
+        app:labelVisibilityMode="unlabeled"
+        app:menu="@menu/thanhdieuhuong" />
+
 </LinearLayout>
