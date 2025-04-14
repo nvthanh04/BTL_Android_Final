@@ -12,10 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.btlandroid.Model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText mail,pass;
@@ -57,13 +63,48 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()){
-                    Toast.makeText(LoginActivity.this, "Đăng nhập thành công!!", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
-                    startActivity(intent);
+                    checkUserRole();
                 }
                 else{
                     Toast.makeText(LoginActivity.this, "Đăng nhập thất bại!!", Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+    }
+
+    private void checkUserRole() {
+        String uid = mAuth.getCurrentUser().getUid();
+        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference("users").child(uid);
+
+        userRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    User user = snapshot.getValue(User.class);
+                    if (user != null && user.getRole() != null) {
+                        Intent intent;
+                        if (user.getRole().equals("ADMIN")) {
+                            intent = new Intent(LoginActivity.this, HomeAdminActivity.class);
+                        } else if (user.getRole().equals("CUSTOMER")) {
+                            intent = new Intent(LoginActivity.this, HomeActivity.class);
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Vai trò không hợp lệ!", Toast.LENGTH_LONG).show();
+                            return;
+                        }
+                        Toast.makeText(LoginActivity.this, "Đăng nhập thành công!!", Toast.LENGTH_SHORT).show();
+                        startActivity(intent);
+                        finish();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "Không tìm thấy thông tin người dùng!", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(LoginActivity.this, "Dữ liệu người dùng không tồn tại!", Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(LoginActivity.this, "Lỗi: " + error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

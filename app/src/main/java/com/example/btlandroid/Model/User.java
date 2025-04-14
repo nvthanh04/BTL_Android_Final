@@ -1,17 +1,34 @@
 package com.example.btlandroid.Model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
+        public String id;
         public String password;
 
         public String name;
         public String email;
         public String phone;
 
-        public User(String password, String name, String email, String phone) {
+        public String role;
+
+        public User(){
+        }
+        public User(String id,String password, String name, String email, String phone, String role) {
+            this.id = id;
             this.password = password;
             this.name = name;
             this.email = email;
             this.phone = phone;
+            this.role = role;
+        }
+
+        public String getId(){
+            return id;
+        }
+
+        public void setId(String id){
+            this.id = id;
         }
 
         public String getPassword(){
@@ -42,6 +59,10 @@ public class User {
             return phone;
         }
 
+        public String getRole(){return role;}
+        public void setRole(String role){
+            this.role = role;
+        }
         public void setPhone(String phone){
             this.phone = phone;
         }

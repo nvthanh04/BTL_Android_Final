@@ -4,99 +4,116 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
     android:background="@drawable/nen"
     tools:context=".MainActivity">
 
-
     <TextView
         android:id="@+id/textView"
-        android:layout_width="196dp"
-        android:layout_height="54dp"
-        android:text="FROG-LEARN"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="FROG-BOOK"
         android:textColor="#504848"
         android:textSize="30sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.544"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.147" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="133dp"
-        android:layout_height="133dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="123dp"
+        android:layout_height="120dp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.257"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintWidth_percent="0.35"
         app:srcCompat="@drawable/logo" />
 
-    <LinearLayout
-        android:id="@+id/r412qe9glh6j"
-        android:layout_width="415dp"
-        android:layout_height="548dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/content_container"
+        android:layout_width="411dp"
+        android:layout_height="474dp"
         android:background="@drawable/cr20bffffff"
-        android:orientation="vertical"
-        android:paddingTop="39dp"
-        android:paddingBottom="142dp"
+        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.6"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintWidth_percent="0.9">
 
+        <!-- Description -->
         <TextView
             android:id="@+id/description"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="30dp"
-            android:layout_marginBottom="20dp"
-            android:gravity="center"
-            android:text="Tham gia ngay cùng FROG-LEARN\nnền tảng học và luyện thi\nthông minh"
+            android:text="Tham gia ngay cùng FROG-BOOK\ nơi cho bạn thỏa sức lựa\n chọn tri thức cho mình!"
             android:textAlignment="center"
             android:textColor="#000000"
             android:textSize="23sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- Login Button -->
+
+        <!-- Register Button -->
+
+        <!-- Terms Text -->
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnLogin"
-            android:layout_width="305dp"
+            android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_marginHorizontal="62dp"
-            android:layout_marginBottom="12dp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/btnlogin"
             android:backgroundTint="@null"
             android:forceDarkAllowed="false"
             android:text="Đăng nhập"
             android:textColor="#FFFFFF"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/description"
+            app:layout_constraintWidth_percent="0.75" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnRegister"
-            android:layout_width="305dp"
+            android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_marginHorizontal="62dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginTop="28dp"
             android:background="@drawable/s0265f9sw1cr15"
             android:backgroundTint="@null"
             android:forceDarkAllowed="false"
             android:text="Đăng ký"
             android:textColor="#0265F9"
-            android:textSize="22sp" />
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnLogin"
+            app:layout_constraintWidth_percent="0.75" />
 
         <TextView
             android:id="@+id/txtTerms"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_marginBottom="68dp"
             android:text="@string/terms_policy"
             android:textAlignment="center"
             android:textColor="#777"
             android:textSize="16sp"
-            android:layout_marginHorizontal="62dp"/>
-    </LinearLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnRegister"
+            app:layout_constraintVertical_bias="1.0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

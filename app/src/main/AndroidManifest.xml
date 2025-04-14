@@ -13,6 +13,33 @@
         android:theme="@style/Theme.BTLAndroid"
         tools:targetApi="31">
         <activity
+            android:name=".TaikhoanAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SearchAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DoanhthuAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EditAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SanphamAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddAdminActivity"
+            android:exported="false" />
+        <activity
+            android:name=".GiohangActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HoadonActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SearchActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
@@ -23,16 +50,28 @@
         </activity>
         <activity
             android:name=".RegisterActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".LoginActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".HomeActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
+        <activity
+            android:name=".SanPhamActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ThanhToanOnline"
+            android:exported="true" />
+        <activity
+            android:name=".ListHoaDonActivity"
+            android:exported="true" />
+        <activity
+            android:name=".HomeAdminActivity"
+            android:exported="true" />
+        <activity
+            android:name=".TaikhoanActivity"
+            android:exported="true" />
     </application>
 
 </manifest>

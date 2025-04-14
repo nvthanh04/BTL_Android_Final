@@ -90,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
                             DatabaseReference databaseRef = FirebaseDatabase.getInstance().getReference("users");
                             String userId = user.getUid();
 
-                            User userInfo = new User(userId, Name, mail, Phone);
+                            User userInfo = new User(userId,"", Name, mail, Phone,"");
                             databaseRef.child(userId).setValue(userInfo)
                                     .addOnCompleteListener(dbTask -> {
                                         if (dbTask.isSuccessful()) {
