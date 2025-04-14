@@ -30,22 +30,21 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeAdminActivity extends AppCompatActivity {
     private Button btnall, btnTieuHoc, btnTHCS, btnTHPT, btnToic, btnIelts;
-    private AutoCompleteTextView search;
+    private AutoCompleteTextView searchAdmin;
     private RecyclerView rcvbook;
-    private BookAdapter mbookAdapter;
+    private BookAdminAdapter mbookAdapter;
     private List<Book> mListBook;
     private List<String> mListBookKeys; // Danh sách khóa
     private List<Button> buttonList; // Danh sách để quản lý các nút
     private String currentCategory = "All"; // Lưu danh mục hiện tại
-    private ImageView giohang, ivBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_home_admin);
 
         // Khởi tạo các view
         btnall = findViewById(R.id.btnall);
@@ -54,10 +53,13 @@ public class HomeActivity extends AppCompatActivity {
         btnTHPT = findViewById(R.id.btnTHPT);
         btnToic = findViewById(R.id.btnToic);
         btnIelts = findViewById(R.id.btnIelts);
-        search = findViewById(R.id.search);
-        giohang = findViewById(R.id.giohang);
         rcvbook = findViewById(R.id.rcvbook);
-        ivBack = findViewById(R.id.ivback);
+        ImageView ivAdd = findViewById(R.id.ivAdd);
+        searchAdmin = findViewById(R.id.searchAdmin);
+
+        searchAdmin.setKeyListener(null);
+        searchAdmin.setKeyListener(null);
+        searchAdmin.setFocusableInTouchMode(false);
 
         // Thêm các nút vào danh sách
         buttonList = new ArrayList<>();
@@ -78,7 +80,7 @@ public class HomeActivity extends AppCompatActivity {
 
         mListBook = new ArrayList<>();
         mListBookKeys = new ArrayList<>();
-        mbookAdapter = new BookAdapter(this, mListBook, mListBookKeys);
+        mbookAdapter = new BookAdminAdapter(this, mListBook, mListBookKeys,true);
         rcvbook.setAdapter(mbookAdapter);
 
         // Đặt trạng thái ban đầu: nút "Tất cả" màu xanh
@@ -86,8 +88,6 @@ public class HomeActivity extends AppCompatActivity {
 
         // Lấy danh sách sách và hiển thị "Tất cả" khi dữ liệu sẵn sàng
         getListBook();
-
-        ivBack.setOnClickListener(v->finish());
 
         // Sự kiện nhấn nút
         btnall.setOnClickListener(v -> {
@@ -116,21 +116,21 @@ public class HomeActivity extends AppCompatActivity {
         });
 
         // Sự kiện tìm kiếm
-        search.setFocusable(false);
-        search.setOnClickListener(view -> {
-            Intent intent = new Intent(HomeActivity.this, SearchActivity.class);
+        searchAdmin.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeAdminActivity.this, SearchAdminActivity.class);
             startActivity(intent);
         });
 
-
-        giohang.setOnClickListener(view ->{
-            Intent intent = new Intent(HomeActivity.this, GiohangActivity.class);
+        // Thêm sự kiện nhấn cho ivAdd
+        ivAdd.setOnClickListener(v -> {
+            Intent intent = new Intent(HomeAdminActivity.this, AddAdminActivity.class);
             startActivity(intent);
         });
+
         // Thiết lập BottomNavigationView
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setSelectedItemId(R.id.nav_home); // Đặt Home là mục mặc định
-
+//
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int itemId = item.getItemId();
             if (itemId == R.id.nav_home) {
@@ -138,19 +138,19 @@ public class HomeActivity extends AppCompatActivity {
                 return true;
             } else if (itemId == R.id.nav_doanhthu) {
                 // Chuyển sang DoanhthuAdminActivity
-                Intent intent = new Intent(HomeActivity.this, ListHoaDonActivity.class);
+                Intent intent = new Intent(HomeAdminActivity.this, DoanhthuAdminActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0); // Tắt animation
                 return true;
             } else if (itemId == R.id.nav_person) {
-                Intent intent = new Intent(HomeActivity.this, TaikhoanActivity.class);
+                Intent intent = new Intent(HomeAdminActivity.this, TaikhoanAdminActivity.class);
                 startActivity(intent);
                 overridePendingTransition(0, 0); // Tắt animation
                 return true;
             }
             return false;
         });
-    }
+}
 
     private void getListBook() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -175,7 +175,7 @@ public class HomeActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(HomeActivity.this, "Lỗi khi lấy danh sách sách: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomeAdminActivity.this, "Lỗi khi lấy danh sách sách: " + error.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    tools:context=".EditAdminActivity">
+
+    <LinearLayout
+        android:id="@+id/llHeaderSanPham"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#CC34B6FF"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="22dp"
+        android:paddingVertical="16dp">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/back"
+            android:contentDescription="Back" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/ivPerson"
+            android:layout_width="33dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="15dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/person" />
+
+        <ImageView
+            android:id="@+id/ivHome"
+            android:layout_width="33dp"
+            android:layout_height="24dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/home_1" />
+    </LinearLayout>
+
+    <!-- Form Section -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- Title -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:gravity="center"
+                android:text="Sửa sản phẩm"
+                android:textColor="#000000"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+
+            <!-- Product Name -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tên sản phẩm"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/editName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Sách giáo khoa Tiếng anh lớp 1"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:background="@drawable/border"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Product Category -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Danh mục sản phẩm"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:layout_marginBottom="8dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/border"
+                android:layout_marginBottom="16dp"
+                android:paddingEnd="8dp"
+                android:gravity="center_vertical">
+
+                <Spinner
+                    android:id="@+id/editDanhmuc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="12dp"
+                    android:spinnerMode="dropdown" />
+
+            </LinearLayout>
+
+            <!-- Quantity -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Số lượng"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/editSl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="10"
+                android:inputType="number"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:background="@drawable/border"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Price -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Đơn giá"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/editPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="112000"
+                android:inputType="numberDecimal"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:background="@drawable/border"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Description (Note) -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mô tả"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/editNote"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mô tả sách"
+                android:textSize="16sp"
+                android:padding="12dp"
+                android:background="@drawable/border"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Product Image -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ảnh sản phẩm"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:layout_marginBottom="8dp" />
+
+            <ImageView
+                android:id="@+id/editImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="centerInside"
+                android:src="@drawable/sgk"
+                android:layout_gravity="center"
+                android:layout_marginBottom="16dp" />
+
+            <!-- Add Button -->
+            <Button
+                android:id="@+id/editButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sửa"
+                android:textSize="16sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#4A90E2"
+                android:paddingHorizontal="16dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="16dp" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
